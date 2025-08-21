@@ -1,0 +1,13 @@
+{
+  "name": "mobile-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node terminal/dispatcher.js ls intro > /tmp/out1 && node terminal/dispatcher.js ping intro > /tmp/out2 && node terminal/dispatcher.js ls networking > /tmp/out3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
