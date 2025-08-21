@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-offWhite text-armadilloBlack font-[Inter]">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iron Dillo XSS Demo</title>
+  <meta id="csp" http-equiv="Content-Security-Policy" content="">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            armadilloBlack: '#1A1A1A',
+            armadilloGray: '#4A4A4A',
+            oliveGreen: '#6B7B3C',
+            oliveDark: '#55622F',
+            offWhite: '#F8F9FA'
+          }
+        }
+      }
+    }
+  </script>
+  <script src="app.js" defer></script>
+</head>
+<body class="bg-offWhite text-armadilloBlack font-[Inter]" x-data="xssDemo">
+  <header class="flex items-center p-4 bg-armadilloBlack text-offWhite">
+    <img src="armadillo.svg" alt="Iron Dillo logo" class="h-8 w-8 mr-2">
+    <h1 class="text-xl font-bold">Iron Dillo Cybersecurity</h1>
+    <nav class="ml-auto flex items-center space-x-4">
+      <a href="index.html" class="underline">Home</a>
+      <a href="sqli.html" class="underline">SQLi Demo</a>
+      <label for="secureToggle" class="mr-2">Secure View</label>
+      <input type="checkbox" id="secureToggle" class="h-4 w-4" x-on:change="toggleSecure()">
+    </nav>
+  </header>
+  <main class="p-4 space-y-8">
+    <section>
+      <h2 class="text-lg font-semibold">Comments (Stored XSS Demo)</h2>
+      <div class="mt-2">
+        <textarea x-model="commentInput" class="w-full border p-2" placeholder="Add a comment"></textarea>
+        <button x-on:click="addComment" class="mt-2 px-4 py-2 bg-oliveGreen text-offWhite">Post</button>
+      </div>
+      <ul class="mt-4 space-y-2">
+        <template x-for="c in comments" :key="c">
+          <li x-html="secure ? escapeHTML(c) : c"></li>
+        </template>
+      </ul>
+      <p class="text-sm text-oliveDark mt-2">
+        Hint: Try &lt;script&gt;alert('Stored XSS')&lt;/script&gt;.
+        Remediation: escape user input &amp; enforce CSP.
+      </p>
+    </section>
+    <section>
+      <h2 class="text-lg font-semibold">Search (Reflected XSS Demo)</h2>
+      <div class="mt-2 flex">
+        <input x-model="searchInput" class="flex-1 border p-2" placeholder="Search term">
+        <button x-on:click="doSearch" class="ml-2 px-4 py-2 bg-oliveGreen text-offWhite">Go</button>
+      </div>
+      <div x-html="secure ? escapeHTML(searchResultDisplay) : searchResultDisplay" x-ref="searchResult" class="mt-4"></div>
+      <p class="text-sm text-oliveDark mt-2">
+        Hint: Search for &lt;script&gt;alert('Reflected XSS')&lt;/script&gt;.
+        Remediation: escape query parameters &amp; enforce CSP.
+      </p>
+    </section>
+  </main>
+  <footer class="text-center text-sm text-armadilloGray mt-8">Serving Lindale and Tyler, TX</footer>
+</body>
+</html>
