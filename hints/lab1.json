@@ -1,0 +1,14 @@
+{
+  "beginner": [
+    "Start by scanning open ports to map the attack surface.",
+    "Look for obvious misconfigurations in exposed services."
+  ],
+  "intermediate": [
+    "Consider whether you can escalate privileges via insecure service configurations.",
+    "Review logs for patterns that might indicate previous exploitation attempts."
+  ],
+  "advanced": [
+    "Analyze the binary for potential buffer overflows using static analysis.",
+    "Craft a custom exploit payload targeting identified vulnerabilities."
+  ]
+}
