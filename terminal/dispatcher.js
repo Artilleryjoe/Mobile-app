@@ -1,31 +1,10 @@
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 
 function loadCommands() {
-  const yaml = fs.readFileSync(path.join(__dirname, 'commands.yaml'), 'utf8');
-  const lines = yaml.split(/\r?\n/);
-  const commands = [];
-  let current = null;
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (!trimmed) continue;
-    if (trimmed.startsWith('- command:')) {
-      if (current) commands.push(current);
-      current = { command: trimmed.split(':')[1].trim() };
-    } else if (trimmed.startsWith('category:')) {
-      if (current) current.category = trimmed.split(':')[1].trim();
-    } else if (trimmed.startsWith('lab_scopes:')) {
-      if (current) {
-        const list = trimmed.substring('lab_scopes:'.length).trim();
-        current.lab_scopes = list
-          .replace(/\[|\]/g, '')
-          .split(',')
-          .map(s => s.trim());
-      }
-    }
-  }
-  if (current) commands.push(current);
-  return commands;
+  const file = fs.readFileSync(path.join(__dirname, 'commands.yaml'), 'utf8');
+  return yaml.load(file);
 }
 
 const commandMeta = loadCommands();
