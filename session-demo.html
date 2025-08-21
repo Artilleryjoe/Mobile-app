@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Session Security Demo | Iron Dillo Cybersecurity</title>
+  <meta name="description" content="Demonstration of insecure and secure session handling">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" type="image/svg+xml" href="armadillo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    body {font-family: 'Inter', sans-serif;}
+  </style>
+</head>
+<body class="bg-[#F8F9FA] text-[#1A1A1A]">
+  <div class="max-w-3xl mx-auto p-6 space-y-10" x-data="{ token:null, stolen:null }">
+    <header class="flex items-center space-x-4">
+      <img src="armadillo.svg" alt="Iron Dillo logo" class="w-12 h-12">
+      <h1 class="text-2xl font-semibold text-[#6B7B3C]">Session Security Demo</h1>
+    </header>
+
+    <section class="space-y-4">
+      <h2 class="text-xl font-semibold text-[#55622F]">Insecure: Predictable Tokens</h2>
+      <p class="text-[#4A4A4A]">This example issues a predictable cookie that can be read and stolen from JavaScript.</p>
+      <div class="flex flex-wrap gap-2">
+        <button class="px-3 py-2 bg-[#6B7B3C] text-white rounded" @click="token='12345'; document.cookie='session='+token">Login (Insecure)</button>
+        <button class="px-3 py-2 bg-[#4A4A4A] text-white rounded" @click="stolen=document.cookie">Steal Session</button>
+        <button class="px-3 py-2 bg-[#55622F] text-white rounded" @click="token=Math.random().toString(36).slice(2); document.cookie='session='+token">Fix Session</button>
+      </div>
+      <p class="text-sm text-[#4A4A4A]" x-text="'Current cookie: '+document.cookie"></p>
+      <p class="text-sm text-red-700" x-show="stolen" x-text="'Stolen token: '+stolen"></p>
+      <p class="text-xs text-[#4A4A4A]">Cookie set without security flags allows XSS to read and reuse the token.</p>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-xl font-semibold text-[#55622F]">Secure Alternative</h2>
+      <p class="text-[#4A4A4A]">Sessions should use unpredictable identifiers in cookies with security flags. Example server response:</p>
+      <pre class="bg-white p-4 rounded border border-[#4A4A4A] overflow-x-auto text-sm"><code>Set-Cookie: session=&lt;random&gt;; HttpOnly; Secure; SameSite=Strict; Path=/;</code></pre>
+      <p class="text-[#4A4A4A] text-sm">The <code>HttpOnly</code> flag prevents JavaScript access, <code>Secure</code> restricts cookies to HTTPS, and <code>SameSite=Strict</code> mitigates CSRF.</p>
+    </section>
+  </div>
+</body>
+</html>

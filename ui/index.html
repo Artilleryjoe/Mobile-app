@@ -71,5 +71,38 @@
       }
     }
   </script>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src https://fonts.gstatic.com; script-src 'self' https://cdn.tailwindcss.com" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iron Dillo Labs</title>
+  <link rel="icon" type="image/svg+xml" href="/public/logo.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --armadilloBlack: #1A1A1A;
+      --armadilloGray: #4A4A4A;
+      --oliveGreen: #6B7B3C;
+      --oliveDark: #55622F;
+      --offWhite: #F8F9FA;
+    }
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-[var(--offWhite)] text-[var(--armadilloBlack)] min-h-screen">
+  <header class="p-4 flex items-center space-x-2">
+    <img src="/public/logo.svg" alt="Iron Dillo" class="h-8 w-8" />
+    <h1 class="text-xl font-semibold">Iron Dillo Labs</h1>
+  </header>
+  <main class="p-4">
+    <div id="terminal" class="bg-[var(--armadilloBlack)] text-[var(--offWhite)] p-4 h-64 overflow-y-auto"></div>
+    <button id="reset" class="mt-4 px-4 py-2 bg-[var(--oliveGreen)] text-[var(--offWhite)] rounded">Reset</button>
+  </main>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self';">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { armadilloBlack: '#1A1A1A', armadilloGray: '#4A4A4A', oliveGreen: '#6B7B3C', oliveDark: '#55622F', offWhite: '#F8F9FA' } } } };
+  </script>
+  <title>Secure Form</title>
+</head>
+<body class="bg-offWhite font-[Inter] text-armadilloBlack">
+  <header class="p-4 flex items-center">
+    <img src="../logo.svg" alt="Iron Dillo logo" class="h-8 w-8 mr-2">
+    <h1 class="text-xl font-bold">Secure Form Demo</h1>
+  </header>
+  <main class="max-w-md mx-auto p-4">
+    <p class="mb-4">Veteran-owned cybersecurity for East Texas small businesses, individuals, and rural operations — serving Lindale and Tyler.</p>
+    <form class="space-y-4" action="https://example.com/contact" method="POST">
+      <input type="text" name="name" placeholder="Name" class="w-full p-2 border">
+      <input type="email" name="email" placeholder="Email" class="w-full p-2 border">
+      <textarea name="message" placeholder="Message" class="w-full p-2 border"></textarea>
+      <button class="bg-oliveGreen text-offWhite px-4 py-2" type="submit">Send</button>
+    </form>
+    <p class="mt-4 text-sm text-armadilloGray">This form enforces HTTPS and stores preferences in a secure cookie.</p>
+  </main>
+  <script>
+    document.cookie = "prefs=" + encodeURIComponent(JSON.stringify({theme:'dark'})) + "; Secure; SameSite=Lax";
+  </script>
+</body>
+</html>
