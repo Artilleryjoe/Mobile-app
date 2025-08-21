@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node -e \"const d=require('./terminal/dispatcher'); const assert=require('assert'); assert.strictEqual(d.dispatch('ls','intro'),'Executing ls...'); assert.ok(d.dispatch('ping','intro').includes('not available')); assert.ok(d.dispatch('ls','networking').includes('not available')); console.log('tests passed');\""
+    "test": "node terminal/test.js"
   },
   "keywords": [],
   "author": "",

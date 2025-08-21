@@ -1,9 +1,29 @@
-- command: ls
-  category: filesystem
-  lab_scopes: [intro, filesystem]
-- command: pwd
-  category: navigation
-  lab_scopes: [intro, filesystem]
-- command: ping
+- command: help
+  category: core
+  lab_scopes: [xss-reflected-101]
+  output: "Available commands: help, curl, secure_fix, nmap, sqlmap"
+  why: "Use help to see supported commands in this lab."
+- command: curl
   category: network
-  lab_scopes: [networking]
+  lab_scopes: [xss-reflected-101]
+  output: "Simulated request sent."
+  why: "Replays the vulnerable request."
+- command: secure_fix
+  category: fix
+  lab_scopes: [xss-reflected-101]
+  output: "Escaping applied and CSP enabled."
+  why: "Mitigates the reflected XSS."
+- command: nmap
+  category: fun
+  lab_scopes: [xss-reflected-101]
+  output: |-
+    Starting Nmap 7.93 ( https://nmap.org )
+    Not shown: 99 closed ports
+    PORT   STATE SERVICE
+    80/tcp open  http
+  why: "Recon tools reveal running services."
+- command: sqlmap
+  category: fun
+  lab_scopes: [xss-reflected-101]
+  output: "sqlmap identified a vulnerable parameter."
+  why: "Automated scanners can flag injection points."

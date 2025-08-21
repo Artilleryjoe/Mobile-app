@@ -48,3 +48,14 @@ This repository hosts demo pages for illustrating common security pitfalls and t
 - `SECURITY_DEMO.md` provides side-by-side code snippets explaining each fix.
 
 Veteran-owned cybersecurity for East Texas small businesses, individuals, and rural operations — proudly serving Lindale and Tyler.
+## 60-second Smoke Test
+
+### Demo mode
+- `/` shows a directory listing.
+- `/index.html` returns 200.
+- `/does-not-exist` returns 404.
+
+### Secure mode
+- `/` returns 200 if `index.html` exists, otherwise 404.
+- Errors are generic; stack traces are hidden.
+- Responses include `X-Content-Type-Options: nosniff` and a basic `Content-Security-Policy`.

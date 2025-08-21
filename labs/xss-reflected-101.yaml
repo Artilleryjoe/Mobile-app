@@ -1,0 +1,17 @@
+id: xss-reflected-101
+title: Reflected XSS 101
+routes:
+  insecure: /labs/xss-101.html
+  secure: /secure/labs/xss-101.html
+checks:
+  - path: /labs/xss-101.html?q=<script>alert(1)</script>
+    expect: '<script>alert(1)</script>'
+  - path: /secure/labs/xss-101.html?q=<script>alert(1)</script>
+    expect: '&lt;script&gt;alert(1)&lt;/script&gt;'
+quiz:
+  question: Which header helps mitigate reflected XSS?
+  options:
+    - Content-Security-Policy
+    - X-Powered-By
+    - Server
+  answer: Content-Security-Policy

@@ -9,22 +9,28 @@ function loadCommands() {
 
 const commandMeta = loadCommands();
 
-function dispatch(cmd, scope) {
+function dispatch(input, scope, mode = 'beginner') {
+  const [cmd] = (input || '').trim().split(/\s+/);
   const meta = commandMeta.find(c => c.command === cmd);
   if (!meta) {
-    const categories = [...new Set(commandMeta.map(c => c.category))];
-    return `Unknown command "${cmd}". Try one from categories: ${categories.join(', ')}`;
+    if (mode === 'beginner') {
+      return { output: '', hint: 'Unknown command. Type "help" for options.' };
+    }
+    return { output: '' };
   }
   if (!meta.lab_scopes.includes(scope)) {
-    return `The "${cmd}" command is not available in the "${scope}" lab. It belongs to "${meta.category}" and works in: ${meta.lab_scopes.join(', ')}`;
+    if (mode === 'beginner') {
+      return { output: '', hint: `"${cmd}" is not available in this lab.` };
+    }
+    return { output: '' };
   }
-  return `Executing ${cmd}...`;
+  return { output: meta.output, why: meta.why };
 }
 
 if (require.main === module) {
-  const [cmd, scope] = process.argv.slice(2);
-  const message = dispatch(cmd, scope);
-  console.log(message);
+  const [input, scope, mode] = process.argv.slice(2);
+  const message = dispatch(input, scope, mode);
+  console.log(JSON.stringify(message, null, 2));
 }
 
 module.exports = { dispatch };
