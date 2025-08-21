@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-[#1A1A1A] text-[#F8F9FA]">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iron Dillo SQL Injection Demo</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' https://cdn.jsdelivr.net; img-src 'self';">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-[#1A1A1A] text-[#F8F9FA]" x-data="{username:'', password:'', search:''}">
+  <header class="p-6 text-center space-y-4">
+    <img src="armadillo.svg" alt="Iron Dillo logo" class="h-16 mx-auto">
+    <h1 class="text-3xl font-semibold">Iron Dillo Security Demos</h1>
+    <p class="text-lg">Veteran-owned cybersecurity for East Texas small businesses, individuals, and rural operations.</p>
+    <a href="#login" class="bg-[#6B7B3C] text-[#F8F9FA] px-6 py-3 rounded">Explore Vulnerabilities</a>
+  </header>
+  <main class="p-6 space-y-16">
+    <section id="login" class="space-y-4">
+      <h2 class="text-xl font-semibold">Vulnerable Login</h2>
+      <p>Try entering <code class="bg-[#4A4A4A] px-1 rounded">' OR '1'='1</code> as the username to bypass authentication.</p>
+      <form class="space-y-2">
+        <input type="text" x-model="username" placeholder="username" class="p-2 w-full text-[#1A1A1A]" />
+        <input type="password" x-model="password" placeholder="password" class="p-2 w-full text-[#1A1A1A]" />
+        <button type="button" class="bg-[#6B7B3C] text-[#F8F9FA] px-4 py-2 rounded">Login</button>
+      </form>
+      <div class="bg-[#4A4A4A] p-4 rounded">
+        <h3 class="font-semibold">Insecure Query</h3>
+        <pre class="whitespace-pre-wrap text-sm"><code x-text="'SELECT * FROM users WHERE username = \'" + username + "\' AND password = \'" + password + "\';'"></code></pre>
+      </div>
+      <div class="bg-[#4A4A4A] p-4 rounded">
+        <h3 class="font-semibold">Prepared Statement</h3>
+<pre class="whitespace-pre-wrap text-sm"><code>SELECT * FROM users WHERE username = ? AND password = ?;
+Params: [<span x-text="username"></span>, <span x-text="password"></span>]</code></pre>
+      </div>
+    </section>
+    <section id="search" class="space-y-4">
+      <h2 class="text-xl font-semibold">Vulnerable Search</h2>
+      <p>Try entering <code class="bg-[#4A4A4A] px-1 rounded">' UNION SELECT username, password FROM users --</code> to pull extra data.</p>
+      <form class="space-y-2">
+        <input type="text" x-model="search" placeholder="search users" class="p-2 w-full text-[#1A1A1A]" />
+        <button type="button" class="bg-[#6B7B3C] text-[#F8F9FA] px-4 py-2 rounded">Search</button>
+      </form>
+      <div class="bg-[#4A4A4A] p-4 rounded">
+        <h3 class="font-semibold">Insecure Query</h3>
+        <pre class="whitespace-pre-wrap text-sm"><code x-text="'SELECT name, email FROM users WHERE name LIKE \'%' + search + '%\''"></code></pre>
+      </div>
+      <div class="bg-[#4A4A4A] p-4 rounded">
+        <h3 class="font-semibold">Prepared Statement</h3>
+<pre class="whitespace-pre-wrap text-sm"><code>SELECT name, email FROM users WHERE name LIKE ?;
+Params: [<span x-text="'%'+search+'%'"></span>]</code></pre>
+      </div>
+    </section>
+  </main>
+  <footer class="p-4 text-center text-sm">
+    <p>Serving Lindale and Tyler. Veteran-owned cybersecurity for East Texas small businesses, individuals, and rural operations.</p>
+  </footer>
+</body>
+</html>
