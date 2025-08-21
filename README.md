@@ -1,3 +1,8 @@
+# Mobile-app
+
+This repository includes a session security demonstration for the Iron Dillo Cybersecurity site.
+Open `session-demo.html` in a browser to explore predictable versus secure session handling with explanatory security headers.
+
 # Iron Dillo Mobile App
 
 This repository hosts demo pages for illustrating common security pitfalls and their fixes.
@@ -7,3 +12,4 @@ This repository hosts demo pages for illustrating common security pitfalls and t
 - `SECURITY_DEMO.md` provides side-by-side code snippets explaining each fix.
 
 Veteran-owned cybersecurity for East Texas small businesses, individuals, and rural operations — proudly serving Lindale and Tyler.
+
