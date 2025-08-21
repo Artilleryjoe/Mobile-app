@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
-  <meta charset="UTF-8">
-  <title>Demo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iron Dillo Cybersecurity</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            armadilloBlack: '#1A1A1A',
+            armadilloGray: '#4A4A4A',
+            oliveGreen: '#6B7B3C',
+            oliveDark: '#55622F',
+            offWhite: '#F8F9FA'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body>
-  <h1>Demo Directory</h1>
+<body class="h-full font-sans bg-offWhite text-armadilloBlack">
+  <header class="flex items-center justify-between p-4 bg-oliveGreen text-offWhite">
+    <img src="logo.svg" alt="Iron Dillo logo" class="h-8" />
+  </header>
+  <main class="flex flex-col items-center justify-center text-center px-4 py-24">
+    <h1 class="text-4xl font-bold mb-4">Veteran-owned cybersecurity for East Texas</h1>
+    <p class="text-lg mb-6">Protecting individuals, small businesses, and rural operations in Lindale, Tyler, and beyond.</p>
+    <a href="mailto:contact@irondillo.com" class="px-6 py-3 bg-oliveGreen hover:bg-oliveDark text-offWhite rounded">Get Protected</a>
+    <section class="mt-12">
+      <h2 class="text-2xl font-semibold mb-4">Service Areas</h2>
+      <ul class="space-y-2">
+        <li>Individuals</li>
+        <li>Small Businesses</li>
+        <li>Rural Operations</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="text-center p-4 text-sm text-armadilloGray">
+    &copy; Iron Dillo Cybersecurity
+  </footer>
 </body>
 </html>
