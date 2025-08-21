@@ -1,4 +1,77 @@
 <!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="utf-8" />
+  <title>Iron Dillo Cybersecurity</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            armadilloBlack: '#1A1A1A',
+            armadilloGray: '#4A4A4A',
+            oliveGreen: '#6B7B3C',
+            oliveDark: '#55622F',
+            offWhite: '#F8F9FA'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; script-src 'self' https://unpkg.com; img-src 'self'; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com;" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+</head>
+<body class="bg-offWhite text-armadilloBlack font-sans min-h-full">
+  <header class="p-4 flex items-center">
+    <img src="assets/logo.svg" alt="Iron Dillo logo" class="h-10 w-auto mr-2" />
+    <h1 class="text-xl font-bold">Iron Dillo Cybersecurity</h1>
+  </header>
+  <main class="p-4" x-data="categoryUI()">
+    <section class="mb-6 text-center">
+      <h2 class="text-3xl font-bold mb-4">Veteran-owned cybersecurity for East Texas</h2>
+      <p class="mb-4">Protecting individuals, small businesses, and rural operations in Lindale, Tyler, and beyond.</p>
+      <a href="#contact" class="bg-oliveGreen text-offWhite px-4 py-2 rounded">Get Protected</a>
+    </section>
+    <div class="mb-4 flex space-x-2 justify-center">
+      <template x-for="(color, cat) in categories" :key="cat">
+        <button @click="category = cat"
+          :style="{backgroundColor: category === cat ? color : '#4A4A4A', color: '#F8F9FA'}"
+          class="px-3 py-1 rounded capitalize">
+          <span x-text="cat"></span>
+        </button>
+      </template>
+    </div>
+    <div class="p-4 border border-armadilloGray rounded text-center" :style="{backgroundColor: activeColor + '22'}">
+      <p x-text="`Current mode: ${category}`"></p>
+    </div>
+  </main>
+  <script>
+    function categoryUI() {
+      return {
+        category: 'navigation',
+        categories: {
+          navigation: '#6B7B3C',
+          filesystem: '#55622F',
+          network: '#4A4A4A'
+        },
+        get activeColor() {
+          return this.categories[this.category]
+        }
+      }
+    }
+  </script>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />

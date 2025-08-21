@@ -1,0 +1,9 @@
+- command: ls
+  category: filesystem
+  lab_scopes: [intro, filesystem]
+- command: pwd
+  category: navigation
+  lab_scopes: [intro, filesystem]
+- command: ping
+  category: network
+  lab_scopes: [networking]
