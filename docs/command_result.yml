@@ -1,0 +1,22 @@
+CommandResult:
+  description: Response returned by a command handler.
+  fields:
+    output:
+      type: string
+      description: Raw output of the command.
+      secure_coding_practice: "Sanitize output to avoid injection and remove sensitive data."
+    explanation:
+      type: string
+      description: Rationale for the command's result.
+      secure_coding_practice: "Avoid revealing secrets; keep error messages generic."
+Usage:
+  - After executing any command, wrap the data in a CommandResult object.
+  - Use Alpine.js to toggle visibility of the explanation:
+    example: |
+      <div x-data="{ open: false }">
+        <button @click="open = !open">Toggle explanation</button>
+        <pre x-show="open" x-text="commandResult.explanation"></pre>
+      </div>
+Security:
+  - Validate and escape terminal output before rendering.
+  - Enforce Content-Security-Policy headers on pages embedding terminal output.
