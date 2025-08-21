@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reflected XSS Demo (Secure)</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            armadilloBlack: '#1A1A1A',
+            armadilloGray: '#4A4A4A',
+            oliveGreen: '#6B7B3C',
+            oliveDark: '#55622F',
+            offWhite: '#F8F9FA'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="h-full font-sans bg-offWhite text-armadilloBlack p-4">
+  <header class="mb-4">
+    <img src="../logo.svg" alt="Iron Dillo logo" class="h-8" />
+  </header>
+  <form class="mb-4">
+    <label for="q" class="block mb-2">Search</label>
+    <input id="q" name="q" class="border p-2 w-full" />
+  </form>
+  <p id="result" class="mt-4"></p>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const q = params.get('q') || '';
+    document.getElementById('result').textContent = q;
+  </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="utf-8" />
+  <title>Lab</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            armadilloBlack: '#1A1A1A',
+            armadilloGray: '#4A4A4A',
+            oliveGreen: '#6B7B3C',
+            oliveDark: '#55622F',
+            offWhite: '#F8F9FA'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com; script-src 'self' https://unpkg.com; img-src 'self'; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com;" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="no-referrer" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+</head>
+<body class="h-full font-sans bg-offWhite text-armadilloBlack" x-data="lab()">
+  <div class="h-full flex flex-col lg:flex-row">
+    <section class="lg:w-1/2 h-1/2 lg:h-full flex flex-col border-b lg:border-b-0 lg:border-r border-armadilloGray">
+      <div class="flex-1 overflow-y-auto bg-armadilloBlack text-offWhite p-2 whitespace-pre-wrap" x-text="terminal"></div>
+      <input type="text" placeholder="Type command" class="p-2 border-t border-armadilloGray" @keydown.enter.prevent="handle($event.target.value); $event.target.value=''" />
+      <p class="text-armadilloGray p-2" x-show="hint" x-text="hint"></p>
+    </section>
+    <section class="lg:w-1/2 h-1/2 lg:h-full flex flex-col">
+      <iframe :src="preview" class="flex-1 border-b border-armadilloGray"></iframe>
+      <div class="p-2 flex items-center justify-between">
+        <button class="px-4 py-2 bg-oliveGreen text-offWhite rounded" @click="reset">Reset Lab</button>
+        <button class="px-4 py-2 bg-armadilloGray text-offWhite rounded" @click="showWhy = !showWhy">Why it worked / How to fix</button>
+      </div>
+      <div class="p-4 border-t border-armadilloGray" x-show="showWhy">
+        <p x-text="why"></p>
+      </div>
+    </section>
+  </div>
+  <script>
+    function lab() {
+      return {
+        scope: 'xss-reflected-101',
+        stage: 'explore',
+        terminal: '',
+        hint: '',
+        why: '',
+        showWhy: false,
+        preview: '/labs/xss-101.html',
+        handle(cmd) {
+          const res = dispatcher(cmd, this.scope);
+          this.terminal += `$ ${cmd}\n${res.output}\n`;
+          this.hint = res.hint || '';
+          if (res.why) this.why = res.why;
+          if (cmd === 'curl' && this.stage === 'explore') {
+            this.preview = '/labs/xss-101.html?q=<script>alert(1)</script>';
+            this.stage = 'exploit';
+          } else if (cmd === 'secure_fix' && this.stage === 'exploit') {
+            this.preview = '/secure/labs/xss-101.html?q=<script>alert(1)</script>';
+            this.stage = 'verify';
+          }
+        },
+        reset() {
+          this.stage = 'explore';
+          this.terminal = '';
+          this.hint = '';
+          this.why = '';
+          this.preview = '/labs/xss-101.html';
+        }
+      }
+    }
+    function dispatcher(cmd, scope, mode='beginner') {
+      const commands = {
+        help: { output: 'help, curl, secure_fix, nmap, sqlmap', why: 'Use help to see commands.' },
+        curl: { output: 'curl executed', why: 'Shows reflected output.' },
+        secure_fix: { output: 'Applied escaping and CSP.', why: 'Fixes the vulnerability.' },
+        nmap: { output: 'Starting Nmap...\n80/tcp open http', why: 'Reconnaissance example.' },
+        sqlmap: { output: 'sqlmap found injection point', why: 'Automated testing example.' }
+      };
+      const meta = commands[cmd];
+      if (!meta) {
+        return mode === 'beginner' ? { output: '', hint: 'Unknown command. Try "help".' } : { output: '' };
+      }
+      return meta;
+    }
+  </script>
+</body>
+</html>
