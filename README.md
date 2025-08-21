@@ -26,3 +26,18 @@ Directory listing is disabled and users see a generic error message.
 - **Detailed Error Messages**: Verbose stack traces disclose implementation details useful for SQL injection, path traversal, or framework-specific attacks.
 
 Switching to secure mode mitigates these information disclosure vectors.
+
+# Mobile-app
+
+This repository includes a session security demonstration for the Iron Dillo Cybersecurity site.
+Open `session-demo.html` in a browser to explore predictable versus secure session handling with explanatory security headers.
+
+# Iron Dillo Mobile App
+
+This repository hosts demo pages for illustrating common security pitfalls and their fixes.
+
+- `insecure/login.html` and `secure/login.html` show an unsecured login with hardcoded credentials and a patched version using HTTPS, random credentials, and secure cookies.
+- `insecure/form.html` and `secure/form.html` demonstrate form handling over HTTP versus HTTPS with proper cookie protection.
+- `SECURITY_DEMO.md` provides side-by-side code snippets explaining each fix.
+
+Veteran-owned cybersecurity for East Texas small businesses, individuals, and rural operations — proudly serving Lindale and Tyler.
