@@ -4,10 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node terminal/dispatcher.js ls intro > /tmp/out1 && node terminal/dispatcher.js ping intro > /tmp/out2 && node terminal/dispatcher.js ls networking > /tmp/out3"
+    "test": "node -e \"const d=require('./terminal/dispatcher'); const assert=require('assert'); assert.strictEqual(d.dispatch('ls','intro'),'Executing ls...'); assert.ok(d.dispatch('ping','intro').includes('not available')); assert.ok(d.dispatch('ls','networking').includes('not available')); console.log('tests passed');\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
 }
