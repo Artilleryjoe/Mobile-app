@@ -1,6 +1,6 @@
 # Iron Dillo Mobile App
 
-Prototype assets for Iron Dillo Cybersecurity training. Veteran-owned cybersecurity for East Texas small businesses, individuals, and rural operations — proudly serving Lindale and Tyler.
+Prototype assets for Iron Dillo Cybersecurity training. Veteran-owned cybersecurity for East Texas small businesses, individuals, and rural operations proudly serving Lindale and Tyler.
 
 ## Features
 - **Terminal labs**: `terminal/commands.yaml` defines command metadata with categories and lab scopes, and `terminal/dispatcher.js` enforces those rules and offers guidance when a command is out of scope.
