@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "Iron Dillo",
+    "slug": "iron-dillo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "../logo.svg",
+    "splash": {
+      "backgroundColor": "#1A1A1A"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"]
+  }
+}
