@@ -2,6 +2,29 @@
 
 Prototype assets for Iron Dillo Cybersecurity training. Veteran-owned cybersecurity for East Texas small businesses, individuals, and rural operations proudly serving Lindale and Tyler.
 
+## Getting Started
+
+Install dependencies and run the test suite:
+
+```bash
+npm install
+npm test
+```
+
+Launch the Node demo server:
+
+```bash
+node server.js
+```
+
+To explore the React Native prototype, start the Expo dev server:
+
+```bash
+cd react-native
+npm install
+npm start
+```
+
 ## Features
 - **Terminal labs**: `terminal/commands.yaml` defines command metadata with categories and lab scopes, and `terminal/dispatcher.js` enforces those rules and offers guidance when a command is out of scope.
 - **Web UI**: `ui/index.html` uses Tailwind CSS, the Inter font, and Iron Dillo colors to let learners filter categories and highlight the active mode.
