@@ -1,5 +1,5 @@
 """Command dispatcher for terminal input."""
-from typing import Callable, Dict, Any
+from typing import Callable, Dict, Any, Tuple
 
 from labs import reset_all
 from scores.manager import ScoreManager
@@ -7,16 +7,16 @@ from .result import CommandResult
 
 CommandHandler = Callable[..., Any]
 
-# Mapping of allowed command names to their handlers
-COMMANDS: Dict[str, CommandHandler] = {}
+# Mapping of allowed command names to their handlers and categories
+COMMANDS: Dict[str, Tuple[CommandHandler, str]] = {}
 
 # Score manager instance shared across command executions
 _scores = ScoreManager()
 
 
-def register_command(name: str, handler: CommandHandler) -> None:
-    """Register a handler for a command."""
-    COMMANDS[name] = handler
+def register_command(name: str, handler: CommandHandler, category: str = "exploit") -> None:
+    """Register a handler for a command with an optional category."""
+    COMMANDS[name] = (handler, category)
 
 
 def dispatch(command: str, *args, **kwargs) -> CommandResult:
@@ -26,11 +26,11 @@ def dispatch(command: str, *args, **kwargs) -> CommandResult:
     handler's output in a :class:`CommandResult`.
     """
     try:
-        handler = COMMANDS[command]
+        handler, category = COMMANDS[command]
     except KeyError as exc:  # pragma: no cover - minimal error handling
         raise ValueError(f"Unsupported command: {command}") from exc
     output = handler(*args, **kwargs)
-    _scores.record_success("exploit")
+    _scores.record_success(category)
     return CommandResult(output=output, explanation=f"Command '{command}' executed.")
 
 
@@ -41,4 +41,4 @@ def _reset_handler() -> str:
 
 
 # Register built-in commands
-register_command("reset", _reset_handler)
+register_command("reset", _reset_handler, category="fix")
