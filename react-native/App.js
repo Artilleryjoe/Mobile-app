@@ -1,7 +1,10 @@
 import React from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default function App() {
+  const handleGetProtected = () => {
+    // TODO: implement navigation or contact flow
+  };
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
@@ -10,6 +13,9 @@ export default function App() {
         <Text style={styles.subtitle}>
           Veteran-owned cybersecurity for East Texas small businesses, individuals, and rural operations.
         </Text>
+        <TouchableOpacity style={styles.button} onPress={handleGetProtected}>
+          <Text style={styles.buttonText}>Get Protected</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -40,5 +46,18 @@ const styles = StyleSheet.create({
     color: '#4A4A4A', // armadilloGray
     fontFamily: 'Inter',
     textAlign: 'center',
+  },
+  button: {
+    marginTop: 16,
+    backgroundColor: '#6B7B3C', // oliveGreen
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 4,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#F8F9FA', // offWhite
+    fontSize: 16,
+    fontFamily: 'Inter',
   },
 });
