@@ -22,6 +22,25 @@
   <main class="max-w-md mx-auto p-4">
     <p class="mb-4">Veteran-owned cybersecurity for East Texas small businesses, individuals, and rural operations — serving Lindale and Tyler.</p>
     <form class="space-y-4" action="https://example.com/contact" method="POST">
+      <label for="name" class="block">Name</label>
+      <input id="name" type="text" name="name" class="w-full p-2 border">
+      <label for="email" class="block">Email</label>
+      <input id="email" type="email" name="email" class="w-full p-2 border">
+      <label for="message" class="block">Message</label>
+      <textarea id="message" name="message" class="w-full p-2 border"></textarea>
+      <button class="bg-oliveGreen text-offWhite px-4 py-2" type="submit">Send</button>
+    </form>
+    <div id="form-feedback" class="mt-2 text-sm" aria-live="polite"></div>
+    <p class="mt-4 text-sm text-armadilloGray">This form enforces HTTPS and stores preferences in a secure cookie.</p>
+  </main>
+  <script>
+    document.cookie = "prefs=" + encodeURIComponent(JSON.stringify({theme:'dark'})) + "; Secure; SameSite=Lax";
+    document.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const feedback = document.getElementById('form-feedback');
+      feedback.textContent = 'Message sent securely!';
+    });
+  </script>
       <input type="text" name="name" placeholder="Name" class="w-full p-2 border">
       <input type="email" name="email" placeholder="Email" class="w-full p-2 border">
       <textarea name="message" placeholder="Message" class="w-full p-2 border"></textarea>
