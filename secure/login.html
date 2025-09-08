@@ -5,15 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { theme: { extend: { colors: { armadilloBlack: '#1A1A1A', armadilloGray: '#4A4A4A', oliveGreen: '#6B7B3C', oliveDark: '#55622F', offWhite: '#F8F9FA' } } } };
-  </script>
   <title>Secure Login</title>
 </head>
-<body class="bg-offWhite font-[Inter] text-armadilloBlack">
+<body class="bg-[#F8F9FA] font-[Inter] text-[#1A1A1A]">
   <header class="p-4 flex items-center">
     <img src="../logo.svg" alt="Iron Dillo logo" class="h-8 w-8 mr-2">
     <h1 class="text-xl font-bold">Secure Login Demo</h1>
@@ -23,18 +20,10 @@
     <form class="space-y-4" action="https://example.com/login" method="POST">
       <input type="text" name="username" placeholder="Username" class="w-full p-2 border">
       <input type="password" name="password" placeholder="Password" class="w-full p-2 border">
-      <button class="bg-oliveGreen text-offWhite px-4 py-2" type="submit">Login</button>
+      <button class="bg-[#6B7B3C] text-[#F8F9FA] px-4 py-2" type="submit">Login</button>
     </form>
-    <p class="mt-4 text-sm text-armadilloGray">This example enforces HTTPS, uses random credentials, and sets a secure cookie.</p>
+    <p class="mt-4 text-sm text-[#4A4A4A]">This example enforces HTTPS, uses random credentials, and sets a secure cookie.</p>
   </main>
-  <script>
-    const USER = crypto.randomUUID();
-    const PASS = crypto.randomUUID();
-    document.querySelector('form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      document.cookie = "session=" + crypto.randomUUID() + "; Secure; SameSite=Strict";
-      alert('Logged in securely!');
-    });
-  </script>
+  <script src="login.js" defer></script>
 </body>
 </html>
