@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self';">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -14,7 +14,7 @@
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
   <title>Secure Form</title>
 </head>
-<body class="bg-offWhite font-[Inter] text-armadilloBlack">
+<body class="bg-[#F8F9FA] font-[Inter] text-[#1A1A1A]">
   <header class="p-4 flex items-center">
     <img src="../logo.svg" alt="Iron Dillo logo" class="h-8 w-8 mr-2">
     <h1 class="text-xl font-bold">Secure Form Demo</h1>
@@ -25,12 +25,10 @@
       <input type="text" name="name" placeholder="Name" class="w-full p-2 border">
       <input type="email" name="email" placeholder="Email" class="w-full p-2 border">
       <textarea name="message" placeholder="Message" class="w-full p-2 border"></textarea>
-      <button class="bg-oliveGreen text-offWhite px-4 py-2" type="submit">Send</button>
+      <button class="bg-[#6B7B3C] text-[#F8F9FA] px-4 py-2" type="submit">Send</button>
     </form>
-    <p class="mt-4 text-sm text-armadilloGray">This form enforces HTTPS and stores preferences in a secure cookie.</p>
+    <p class="mt-4 text-sm text-[#4A4A4A]">This form enforces HTTPS and stores preferences in a secure cookie.</p>
   </main>
-  <script>
-    document.cookie = "prefs=" + encodeURIComponent(JSON.stringify({theme:'dark'})) + "; Secure; SameSite=Lax";
-  </script>
+  <script src="form.js" defer></script>
 </body>
 </html>
